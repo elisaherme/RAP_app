@@ -171,10 +171,8 @@ public class LastTraining extends AppCompatActivity {
         series3.setColor(Color.RED);
         series3.setDataPointsRadius(5);
 
-        //graph.addSeries(series3);
-
         graph.setTitle("Last Training");
-        graph.setTitleTextSize(80);
+        graph.setTitleTextSize(60);
 
         graph.getViewport().setScalable(true);
         graph.getViewport().setScrollable(true);
@@ -190,6 +188,7 @@ public class LastTraining extends AppCompatActivity {
 
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMinX(0);
+        graph.getViewport().setMaxX(21);
 
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);

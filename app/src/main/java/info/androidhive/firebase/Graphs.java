@@ -1,7 +1,9 @@
 package info.androidhive.firebase;
 
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,11 +11,9 @@ import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
-import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.DataPointInterface;
-import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 import com.jjoe64.graphview.series.Series;
@@ -21,13 +21,13 @@ import com.jjoe64.graphview.series.Series;
 import java.util.Calendar;
 import java.util.Date;
 
-
 public class Graphs extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graphs);
+
 
         Calendar calendar = Calendar.getInstance();
         Date d1 = calendar.getTime();
@@ -56,6 +56,15 @@ public class Graphs extends AppCompatActivity {
 
         graph.addSeries(series);
 
+        series.setCustomShape(new PointsGraphSeries.CustomShape() {
+            @Override
+            public void draw(Canvas canvas, Paint paint, float x, float y, DataPointInterface dataPoint) {
+                paint.setStrokeWidth(10);
+                canvas.drawLine(x-5, y-5, x+5, y+5, paint);
+                canvas.drawLine(x+5, y-5, x-5, y+5, paint);
+            }
+        });
+
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(Graphs.this));
         graph.getGridLabelRenderer().setNumHorizontalLabels(3); // only 4 because of the space
 
@@ -69,7 +78,7 @@ public class Graphs extends AppCompatActivity {
         graph.getViewport().setScrollableY(true);
 
         graph.setTitle("Progress");
-        graph.setTitleTextSize(80);
+        graph.setTitleTextSize(60);
 
         series.setTitle("Average Speed");
 
@@ -86,7 +95,7 @@ public class Graphs extends AppCompatActivity {
         series.setOnDataPointTapListener(new OnDataPointTapListener(){
             @Override
             public void onTap(Series series, DataPointInterface dataPoint) {
-                Toast.makeText(Graphs.this, "Average Speed / Date = " +dataPoint, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Graphs.this, "Average Speed = " +dataPoint.getY(), Toast.LENGTH_SHORT).show();
             }
         });
     }

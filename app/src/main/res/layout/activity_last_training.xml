@@ -31,5 +31,23 @@
         android:layout_alignParentEnd="true"
         android:layout_above="@+id/button21" />
 
+    <TextView
+        android:text="Left Y Axis: Force (N)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/LeftY"
+        android:layout_below="@+id/graphLT"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Right Y Axis: Speed (m/s)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/RightY"
+        android:layout_below="@+id/LeftY"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 
 </RelativeLayout>
