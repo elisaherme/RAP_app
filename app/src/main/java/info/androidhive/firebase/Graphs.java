@@ -49,8 +49,7 @@ public class Graphs extends AppCompatActivity {
                 new DataPoint(d2, 2.67),
                 new DataPoint(d3, 2.89),
                 new DataPoint(d4, 3.46),
-                new DataPoint(d5, 3.25),
-                new DataPoint(d6, 2.33)
+                new DataPoint(d5, 3.25)
         });
 
         series.setShape(PointsGraphSeries.Shape.POINT);
@@ -69,20 +68,18 @@ public class Graphs extends AppCompatActivity {
         graph.getViewport().setScrollable(true);
         graph.getViewport().setScrollableY(true);
 
-        graph.setTitle("Trainings Recorded");
+        graph.setTitle("Progress");
         graph.setTitleTextSize(80);
 
         series.setTitle("Average Speed");
 
         GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
         gridLabel.setVerticalAxisTitle("Average Speed (m/s)");
+        gridLabel.setHorizontalAxisTitle("Date");
 
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(4);
-
-        graph.getLegendRenderer().setVisible(true);
-        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
 
         graph.setBackgroundColor(getResources().getColor(android.R.color.background_light));
 
