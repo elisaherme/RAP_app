@@ -10,16 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="info.androidhive.firebase.Graphs">
 
-    <TextView
-        android:text="@string/Graphs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:textSize="50dp"
-        android:id="@+id/textView21" />
-
     <Button
         android:text="@string/MainScreen"
         android:layout_width="wrap_content"
