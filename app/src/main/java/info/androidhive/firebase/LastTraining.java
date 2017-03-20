@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,6 +17,8 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.Series;
 
+import java.util.ArrayList;
+
 
 public class LastTraining extends AppCompatActivity {
 
@@ -23,6 +26,14 @@ public class LastTraining extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_last_training);
+
+        Intent intent = getIntent();
+        Bundle args = intent.getBundleExtra("BUNDLE");
+        ArrayList<String> FSR1 = (ArrayList<String>) args.getSerializable("fsr1");
+
+        for(int i = 0; i < FSR1.size(); i++){
+            Toast.makeText(LastTraining.this, "FSRR " + FSR1.get(i), Toast.LENGTH_SHORT).show();
+        }
 
         GraphView graph = (GraphView) findViewById(R.id.graphLT);
 

@@ -19,10 +19,11 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class DeviceListActivity extends Activity {
     // Debugging for LOGCAT
-           private static final String TAG = "DeviceListActivity";
+    private static final String TAG = "DeviceListActivity";
     private static final boolean D = true;
 
-            // declare button for launching website and textview for connection status
+
+    // declare button for launching website and textview for connection status
     Button tlbutton;
     TextView textView1;
 
@@ -37,7 +38,7 @@ public class DeviceListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_list);
-        }
+    }
 
     @Override
     public void onResume()
@@ -69,16 +70,15 @@ public class DeviceListActivity extends Activity {
             findViewById(R.id.title_paired_devices).setVisibility(View.VISIBLE);//make title viewable
             for (BluetoothDevice device : pairedDevices) {
                 mPairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
-                }
-            } else {
+            }
+        } else {
             String noDevices = getResources().getText(R.string.none_paired).toString();
             mPairedDevicesArrayAdapter.add(noDevices);
-            }
         }
+    }
 
-            // Set up on-click listener for the list (nicked this - unsure)
-            private OnItemClickListener mDeviceClickListener = new OnItemClickListener() {
-
+    // Set up on-click listener for the list (nicked this - unsure)
+    private OnItemClickListener mDeviceClickListener = new OnItemClickListener() {
         public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
 
             textView1.setText("Connecting...");
@@ -87,26 +87,27 @@ public class DeviceListActivity extends Activity {
             String address = info.substring(info.length() - 17);
 
             // Make an intent to start next activity while taking an extra which is the MAC address.
-            Intent i = new Intent(DeviceListActivity.this, MainActivity.class);
+            Intent i = new Intent(DeviceListActivity.this, StartTraining.class);
+            Log.d(TAG, "Hello");
             i.putExtra(EXTRA_DEVICE_ADDRESS, address);
             startActivity(i);
-            }
+        }
     };
 
-            private void checkBTState() {
+    private void checkBTState() {
         // Check device has Bluetooth and that it is turned on
         mBtAdapter=BluetoothAdapter.getDefaultAdapter(); // CHECK THIS OUT THAT IT WORKS!!!
         if(mBtAdapter==null) {
             Toast.makeText(getBaseContext(), "Device does not support Bluetooth", Toast.LENGTH_SHORT).show();
-            } else {
+        } else {
             if (mBtAdapter.isEnabled()) {
                 Log.d(TAG, "...Bluetooth ON...");
-                } else {
+            } else {
                 //Prompt user to turn on Bluetooth
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableBtIntent, 1);
 
-                }
             }
         }
+    }
 }
