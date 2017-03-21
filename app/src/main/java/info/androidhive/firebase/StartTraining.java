@@ -73,20 +73,20 @@ public class StartTraining extends Activity {
                             if (recDataString.charAt(0) == '#')								//if it starts with # we know it is what we are looking for
                             {
                                 String str = recDataString.toString().replace("#", "").replace("~","");
+                                //list.add(str);
                                 String[] parts = str.split(";");
                                 String sensor0 = parts[0];             //get sensor value from string between indices 1-5
                                 String sensor1 = parts[1];            //same again...
                                 String sensor2 = parts[2];
                                 String sensor3 = parts[3];
-                            /*int F0 = Integer.valueOf(sensor0);
-                            int F1 = Integer.valueOf(sensor1);
-                            int F2 = Integer.valueOf(sensor2);
-                            int F3 = Integer.valueOf(sensor3);*/
                                 FSR1Seat.add(sensor0);
                                 FSR2Seat.add(sensor1);
                                 FSR3Seat.add(sensor2);
                                 V.add(sensor3);
-                                Log.i("TAG",sensor0);
+                                Log.d("sensor0",sensor0);
+                                Log.d("sensor1",sensor1);
+                                Log.d("sensor2",sensor2);
+                                Log.d("sensor3",sensor3);
                                 sensorView0.setText(" FSR 0 = " + sensor0);	//update the textviews with sensor values
                                 sensorView1.setText(" FSR 1 = " + sensor1);
                                 sensorView2.setText(" FSR 2 = " + sensor2);
@@ -116,6 +116,21 @@ public class StartTraining extends Activity {
 
     public void onClickStop(View view){
         keepGoing = false;
+
+        if(view.getId() == R.id.StopButton)
+        {
+            Button btn = (Button)findViewById(R.id.StopButton);
+            btn.setEnabled(false);
+
+        }
+
+        Intent i = new Intent(this, LastTraining.class);
+        i.putStringArrayListExtra("list", FSR1Seat);
+        i.putStringArrayListExtra("fsr2", FSR2Seat);
+        i.putStringArrayListExtra("fsr3", FSR3Seat);
+        i.putStringArrayListExtra("vel", V);
+        startActivity(i);
+
     }
 
     @Override
@@ -170,31 +185,9 @@ public class StartTraining extends Activity {
         }
     }
 
-    /*Intent i = new Intent(StartTraining.this, Graphs.class);
-    i.putParcelableArrayListExtra("seat1", (ArrayList<? extends Parcelable>) FSR1Seat);
-    startActivity(i);
 
-    Intent i = new Intent(this, Graphs.class);
-    i.putStringArrayListExtra("seat2", FSR2Seat);
-    startActivity(i);
-
-    Intent i = new Intent(this, Graphs.class);
-    i.putStringArrayListExtra("chest", FSR3Seat);
-    startActivity(i);
-
-    Intent i = new Intent(this, Graphs.class);
-    i.putExtra("vel", V);
-    startActivity(i);*/
-
-    public void next_page(View view){
-        /*Intent intent = new Intent(this, Graphs.class);
-        intent.putExtra("my_array_next", FSR1Seat);
-        startActivity(intent);*/
-
-        Intent intent = new Intent(StartTraining.this, LastTraining.class);
-        Bundle args = new Bundle();
-        args.putSerializable("fsr1",(Serializable)FSR1Seat);
-        intent.putExtra("BUNDLE",args);
+    public void onClickMainScreen(View view){
+        Intent intent = new Intent(this, HomeScreen.class);
         startActivity(intent);
     }
 
@@ -235,7 +228,7 @@ public class StartTraining extends Activity {
 
 
         public void run() {
-            byte[] buffer = new byte[256];
+            byte[] buffer = new byte[1024];
             int bytes;
 
             // Keep looping to listen for received messages

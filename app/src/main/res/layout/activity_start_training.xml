@@ -64,10 +64,20 @@
         android:text="Stop Recording"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/testView1"
+        android:id="@+id/StopButton"
+        android:onClick="onClickStop"
+        android:layout_above="@+id/txtString"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="@string/MainScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/StopButton"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:id="@+id/StopButton"
-        android:onClick="onClickStop"/>
+        android:id="@+id/MainScreen"
+        android:onClick="onClickMainScreen"/>
 
 </RelativeLayout>
