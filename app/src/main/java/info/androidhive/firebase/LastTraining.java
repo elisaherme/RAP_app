@@ -31,9 +31,9 @@ public class LastTraining extends AppCompatActivity {
         Bundle args = intent.getBundleExtra("BUNDLE");
         ArrayList<String> FSR1 = (ArrayList<String>) args.getSerializable("fsr1");
 
-        for(int i = 0; i < FSR1.size(); i++){
+        /*for(int i = 0; i < FSR1.size(); i++){
             Toast.makeText(LastTraining.this, "FSRR " + FSR1.get(i), Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
         GraphView graph = (GraphView) findViewById(R.id.graphLT);
 

@@ -48,11 +48,6 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     public void onClickStartTraining(View view){
-        Intent intent = new Intent(this, StartTraining.class);
-        startActivity(intent);
-    }
-
-    public void onClickDeviceList(View view){
         Intent intent = new Intent(this, DeviceListActivity.class);
         startActivity(intent);
     }
